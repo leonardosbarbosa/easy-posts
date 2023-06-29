@@ -16,7 +16,7 @@ public class User {
     private String email;
 
     @DBRef(lazy = true)
-    private final List<Post> posts = new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
 
     public User() {
     }
@@ -53,5 +53,9 @@ public class User {
 
     public List<Post> getPosts() {
         return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }
