@@ -1,7 +1,11 @@
 package com.leonardosbarbosa.easyposts.models.entities;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "users")
 public class User {
@@ -10,6 +14,9 @@ public class User {
     private String id;
     private String name;
     private String email;
+
+    @DBRef(lazy = true)
+    private final List<Post> posts = new ArrayList<>();
 
     public User() {
     }
