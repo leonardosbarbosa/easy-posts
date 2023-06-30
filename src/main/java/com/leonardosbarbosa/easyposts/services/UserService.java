@@ -42,6 +42,11 @@ public class UserService {
         return new UserDTO(userEntity);
     }
 
+    public void deleteById(String id) {
+        findEntityById(id);
+        userRepository.deleteById(id);
+    }
+
     private User findEntityById(String id) {
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
     }
