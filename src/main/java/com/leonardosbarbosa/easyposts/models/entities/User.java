@@ -1,5 +1,6 @@
 package com.leonardosbarbosa.easyposts.models.entities;
 
+import com.leonardosbarbosa.easyposts.models.dto.UserDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,6 +26,11 @@ public class User {
         this.id = id;
         this.name = name;
         this.email = email;
+    }
+
+    public User(UserDTO userDTO) {
+        this.name = userDTO.getName();
+        this.email = userDTO.getEmail();
     }
 
     public String getId() {

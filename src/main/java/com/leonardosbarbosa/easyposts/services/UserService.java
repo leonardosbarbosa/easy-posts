@@ -26,4 +26,10 @@ public class UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         return new UserDTO(user);
     }
+
+    public UserDTO createNew(UserDTO userDTO) {
+        User entity = new User(userDTO);
+        entity = userRepository.insert(entity);
+        return new UserDTO(entity);
+    }
 }
