@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.Objects.nonNull;
+
 @Service
 public class UserService {
 
@@ -23,7 +25,7 @@ public class UserService {
     }
 
     public UserDTO findById(String id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
+        User user = findEntityById(id);
         return new UserDTO(user);
     }
 
@@ -31,5 +33,25 @@ public class UserService {
         User entity = new User(userDTO);
         entity = userRepository.insert(entity);
         return new UserDTO(entity);
+    }
+
+    public UserDTO updateById(String id, UserDTO userDTO) {
+        User userEntity = findEntityById(id);
+        copyDtoToEntity(userDTO, userEntity);
+        userEntity = userRepository.save(userEntity);
+        return new UserDTO(userEntity);
+    }
+
+    private User findEntityById(String id) {
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
+    }
+
+    private void copyDtoToEntity(UserDTO dto, User entity) {
+        if (nonNull(dto.getName())) {
+            entity.setName(dto.getName());
+        }
+        if (nonNull(dto.getEmail())) {
+            entity.setEmail(dto.getEmail());
+        }
     }
 }

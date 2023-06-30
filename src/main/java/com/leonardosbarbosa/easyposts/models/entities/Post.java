@@ -18,7 +18,7 @@ public class Post {
     private String title;
     private String body;
     private Author author;
-    private final List<Comment> comments = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     public Post() {
     }
@@ -73,5 +73,9 @@ public class Post {
 
     public List<Comment> getComments() {
         return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
