@@ -1,5 +1,6 @@
 package com.leonardosbarbosa.easyposts.resources;
 
+import com.leonardosbarbosa.easyposts.models.dto.PostDTO;
 import com.leonardosbarbosa.easyposts.models.dto.UserDTO;
 import com.leonardosbarbosa.easyposts.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -48,5 +49,11 @@ public class UserResource {
     public ResponseEntity<Void> deleteById(@PathVariable String id) {
         userService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("{id}/posts")
+    public ResponseEntity<List<PostDTO>> findPostsByUserId(@PathVariable String id) {
+        var result = userService.findPostsByUserId(id);
+        return ResponseEntity.ok(result);
     }
 }

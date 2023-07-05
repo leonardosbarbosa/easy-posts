@@ -1,5 +1,6 @@
 package com.leonardosbarbosa.easyposts.services;
 
+import com.leonardosbarbosa.easyposts.models.dto.PostDTO;
 import com.leonardosbarbosa.easyposts.models.dto.UserDTO;
 import com.leonardosbarbosa.easyposts.models.entities.User;
 import com.leonardosbarbosa.easyposts.repositories.UserRepository;
@@ -45,6 +46,11 @@ public class UserService {
     public void deleteById(String id) {
         findEntityById(id);
         userRepository.deleteById(id);
+    }
+
+    public List<PostDTO> findPostsByUserId(String userId) {
+        User user = findEntityById(userId);
+        return user.getPosts().stream().map(PostDTO::new).toList();
     }
 
     private User findEntityById(String id) {
