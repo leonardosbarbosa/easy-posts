@@ -6,6 +6,8 @@ import com.leonardosbarbosa.easyposts.repositories.PostRepository;
 import com.leonardosbarbosa.easyposts.services.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostService {
 
@@ -22,5 +24,10 @@ public class PostService {
 
     private Post findEntityById(String id) {
         return postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
+    }
+
+    public List<PostDTO> findByTitleContaining(String text) {
+        var resultList = postRepository.findByTitleContainingIgnoreCase(text);
+        return resultList.stream().map(PostDTO::new).toList();
     }
 }
