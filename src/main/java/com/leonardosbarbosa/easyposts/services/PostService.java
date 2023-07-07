@@ -27,7 +27,7 @@ public class PostService {
     }
 
     public List<PostDTO> findByTitleContaining(String text) {
-        var resultList = postRepository.findByTitleContainingIgnoreCase(text);
+        var resultList = postRepository.searchTitleContaining(text);
         return resultList.stream().map(PostDTO::new).toList();
     }
 }
